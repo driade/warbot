@@ -1,0 +1,4 @@
+alive,name
+1,David
+0,Ana
+0,Martin

@@ -24,12 +24,13 @@
         "ext-mbstring": "*",
         "phpunit/phpunit": "^8.1",
         "mockery/mockery": "^1.2",
-        "phpstan/phpstan": "^0.11.7"
+        "phpstan/phpstan": "^0.12.48",
+        "phpstan/phpstan-strict-rules": "^0.12.5"
     },
     "scripts": {
         "test": [
-            "vendor/bin/phpunit",
-            "vendor/bin/phpstan analyse src tests --level 7"
+            "@php vendor/bin/phpunit",
+            "@php vendor/bin/phpstan analyse -c phpstan.neon"
         ]
     }
 }

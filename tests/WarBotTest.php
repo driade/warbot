@@ -21,7 +21,7 @@ class WarBotTest extends WarBotTestCase
     }
 
     /** @test */
-    public function itCanOnlyBeOne()
+    public function itCanOnlyBeOne(): void
     {
         $this->mock(SendMessageAction::class, function ($m) {
             return $m->shouldReceive('handle')->with(\Mockery::type('string'), \Mockery::type('string'));
@@ -35,14 +35,14 @@ class WarBotTest extends WarBotTestCase
         } while ($message !== null);
     }
 
-    public function testNoWar()
+    public function testNoWar(): void
     {
         // Setup a subject repository mock with only one subject to fetch.
         $subject_repository = $this->createMock(SubjectRepository::class);
-        $subject_repository->expects($this->once())->method('getAlive')->willReturn([new Subject(1,'name1')]);
+        $subject_repository->expects($this->once())->method('getAlive')->willReturn([new Subject(1, 'name1')]);
 
         // Setup some shell mocks strictly to instantiate WarBot.
-        $method_repository = $this->createMock(MethodRepository::class);
+        $method_repository   = $this->createMock(MethodRepository::class);
         $create_graph_action = $this->createMock(CreateGraphAction::class);
         $send_message_action = $this->createMock(SendMessageAction::class);
 
@@ -53,12 +53,12 @@ class WarBotTest extends WarBotTestCase
     }
 
     /** @test */
-    public function testWarWithTwoUsers()
+    public function testWarWithTwoUsers(): void
     {
         // Setup a subject repository mock with two subjects to fetch.
         // asserting that we do kill off a subject.
         $subject_repository = $this->createMock(SubjectRepository::class);
-        $subject_repository->expects($this->once())->method('getAlive')->willReturn([new Subject(1,'name1'), new Subject(1,'name2')]);
+        $subject_repository->expects($this->once())->method('getAlive')->willReturn([new Subject(1, 'name1'), new Subject(1, 'name2')]);
         $subject_repository->expects($this->once())->method('kill')->with(self::isInstanceOf(Subject::class));
 
         // Setup a method repository to provide a kill method.

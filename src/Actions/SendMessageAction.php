@@ -15,7 +15,7 @@ class SendMessageAction
         $this->config_repository = $config_repository;
     }
 
-    public function handle(string $message, string $image)
+    public function handle(string $message, string $image): void
     {
         $connection = new TwitterOAuth(
             $this->config_repository->get('TWITTER_CONSUMER_KEY'),

@@ -39,7 +39,7 @@ class CreateGraphAction
             $box = null;
             // echo "\n\n";
             // echo $subject->name . ": $x - y: $y\n";
-            $image->text($subject->name, (int) $x, (int) $y, function ($font) use (&$box) {
+            $image->text($subject->name, (int) $x, (int) $y, function ($font) use (&$box): void {
                 $font->file('fonts/arial.ttf');
                 $font->size(12);
                 $font->color('#000');
@@ -47,8 +47,8 @@ class CreateGraphAction
                 $box = $font->getBoxSize();
             });
 
-            if ( ! $subject->alive) {
-                $image->rectangle((int) $x, (int) $y - 10, (int) $x + $box['width'], (int) $y - 10 + $box['height'], function ($draw) {
+            if ($subject->alive === 0) {
+                $image->rectangle((int) $x, (int) $y - 10, (int) $x + $box['width'], (int) $y - 10 + $box['height'], function ($draw): void{
                     $draw->background('rgba(255,0,0,0.5)');
                 });
             }

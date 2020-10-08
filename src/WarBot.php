@@ -15,7 +15,7 @@ class WarBot
     private $winner;
     /** @var Subject|null */
     private $loser;
-    /** @var array */
+    /** @var array<Subject> */
     private $alive;
     /** @var string */
     private $message;
@@ -75,7 +75,7 @@ class WarBot
         return true;
     }
 
-    private function createMessage()
+    private function createMessage(): void
     {
         $method = $this->method_repository->getOne();
 
@@ -88,12 +88,12 @@ class WarBot
         }
     }
 
-    private function tweet()
+    private function tweet(): void
     {
         $this->send_message_action->handle($this->message, $this->graph);
     }
 
-    private function createGraph()
+    private function createGraph(): void
     {
         $image       = $this->create_graph_action->handle();
         $this->graph = __DIR__ . '/../' . $image;

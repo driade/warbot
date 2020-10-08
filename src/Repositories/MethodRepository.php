@@ -6,15 +6,16 @@ use WarBot\Models\Method;
 
 class MethodRepository extends Repository
 {
+    /** @var string */
     private $path = __DIR__ . '/../../db/methods.txt';
 
-    public function getOne(): Method
+    public function getOne():  ? Method
     {
-        /** @var array */
+        /** @var array<string> */
         $methods = \file($this->path);
         \array_shift($methods);
 
-        $methods = \array_map(function (string $method) {
+        $methods = \array_map(function (string $method) : Method {
             return new Method(\trim($method));
         }, $methods);
 
@@ -23,7 +24,7 @@ class MethodRepository extends Repository
         return \array_pop($methods);
     }
 
-    public function reset()
+    public function reset(): void
     {
 
     }

@@ -12,8 +12,14 @@ class ConfigRepository extends Repository
         $dotenv->load();
     }
 
-    public function get(string $key)
+    public function get(string $key): string
     {
-        return getenv($key);
+        $value = getenv($key);
+
+        if ($value === false) {
+            throw new \LogicException;
+        }
+
+        return $value;
     }
 }
